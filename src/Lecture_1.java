@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Lecture_1 {
@@ -102,6 +103,10 @@ public class Lecture_1 {
                 System.out.println(message);
             }
         }
+    }
+
+    private static void fileErrors(List<String> l) {
+
     }
 
     public static void main(String[] args) {
