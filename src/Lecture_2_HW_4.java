@@ -38,7 +38,7 @@ public class Lecture_2_HW_4 {
                     koi8rBytes[i] += 128;
             Path koi7 = Paths.get(TASK_FOLDER, "text_koi7r.txt");
             Files.write(koi7, koi8rBytes);
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Error: " + e);
         }
     }
@@ -53,18 +53,20 @@ public class Lecture_2_HW_4 {
     }
 
     private static void convertTextToBytes(String filenameIn, String filenameOut) {
-        try(FileInputStream fileIn = new FileInputStream(TASK_FOLDER + "/" + filenameIn);
-            PrintStream fileOut = new PrintStream(TASK_FOLDER + "/" + filenameOut)) {
+        try (
+                InputStream fileIn = new BufferedInputStream(new FileInputStream(TASK_FOLDER + "/" + filenameIn));
+                PrintStream fileOut = new PrintStream(TASK_FOLDER + "/" + filenameOut)
+        ) {
             int b;
             List<String> t = new ArrayList<>();
             while ((b = fileIn.read()) != -1) {
                 t.add(String.valueOf(b));
             }
             fileOut.print(String.join(" ", t));
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("File was not found." + e);
-        } catch(IOException e) {
-             System.out.println("Error converting text to bytes: " + e);
+        } catch (IOException e) {
+            System.out.println("Error converting text to bytes: " + e);
         }
     }
 }

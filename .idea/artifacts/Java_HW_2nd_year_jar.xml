@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Java_HW_2nd_year:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts</output-path>
+    <root id="archive" name="Java_HW_2nd_year.jar">
+      <element id="module-output" name="Java_HW_2nd_year" />
+    </root>
+  </artifact>
+</component>

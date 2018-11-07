@@ -83,7 +83,6 @@ public class AppExample extends Application {
         HBox.setHgrow(left, Priority.ALWAYS);
 
         list1.setPrefWidth(170);
-        BorderPane.setAlignment(list1, Pos.BOTTOM_RIGHT);
 
         //а это не Constraint, это свойство нашего HBox
         //все элементы должны располагаться снизу по центру
