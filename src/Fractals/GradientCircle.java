@@ -12,7 +12,7 @@ public class GradientCircle implements Fractal {
     public double getColor(double x, double y) {
         double d = Math.pow(x * x + y * y, pow);
         if (d < 1)
-            return 1 - d;
+            return d;
         else
             return 0;
     }
