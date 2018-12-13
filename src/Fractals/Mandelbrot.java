@@ -1,6 +1,6 @@
 package Fractals;
 
-public class Mandelbrot implements Fractal{
+public class Mandelbrot implements Fractal {
 
     private final int iters;
 
@@ -18,8 +18,11 @@ public class Mandelbrot implements Fractal{
             double imz_tmp = 2 * rez * imz + y;
             rez = rez_tmp;
             imz = imz_tmp;
-            if (rez * rez + imz * imz > R * R)
-                return (double) i / iters;
+            double abs2 = rez * rez + imz * imz;
+            if (abs2 > R * R) {
+                double fix = Math.log(Math.log(abs2) / Math.log(R) / 2) / Math.log(2);
+                return (i - fix) / iters;
+            }
         }
         return 1;
     }
