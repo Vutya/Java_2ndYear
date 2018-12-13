@@ -24,7 +24,7 @@ public class DrawFractal extends Application {
     private int iters = 1000;
 
     private Fractal fractal = new Mandelbrot(iters);
-    private Palette palette = new BloodVesselsPalette();
+    private Palette palette = new BlackWhitePalette();
 
     private WritableImage frimg;
     private ImageView imgv = new ImageView();
@@ -142,6 +142,30 @@ public class DrawFractal extends Application {
                 x0 += 0.5 * panel.getWidth() * (dx - dx * ratio);
                 y0 -= 0.5 * panel.getHeight() * (dx - dx * ratio);
                 dx *= ratio;
+                updateImage(0, 0);
+                break;
+            case DIGIT1:
+                palette = new BlackWhitePalette();
+                updateImage(0, 0);
+                break;
+            case DIGIT2:
+                palette = new GradientBWPalette();
+                updateImage(0, 0);
+                break;
+            case DIGIT3:
+                palette = new BloodVesselsPalette();
+                updateImage(0, 0);
+                break;
+            case DIGIT4:
+                palette = new BlackHoleSunPalette(iters);
+                updateImage(0, 0);
+                break;
+            case DIGIT5:
+                palette = new SeaLifePalette(iters);
+                updateImage(0, 0);
+                break;
+            case DIGIT6:
+                palette = new WetSpotPalette();
                 updateImage(0, 0);
                 break;
         }
