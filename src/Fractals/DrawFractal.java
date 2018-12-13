@@ -4,13 +4,12 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -48,20 +47,16 @@ public class DrawFractal extends Application {
         frimg = createFractalImage(400, 400, 0, 0);
         imgv.setImage(frimg);
         panel.getChildren().addAll(imgv);
-        HBox.setHgrow(imgv, Priority.ALWAYS);
         return panel;
     }
 
     private WritableImage createFractalImage(int width, int height, int xc, int yc) {
-        if (xc < 0 || yc < 0)
-            return frimg;
+        if (xc == 0 && yc == 0) {
+            WritableImage wi = new WritableImage(width, height);
+            PixelWriter pw = wi.getPixelWriter();
 
-        WritableImage wi = new WritableImage(width, height);
-        PixelWriter pw = wi.getPixelWriter();
-
-        if (xc > 0) {
-            for (int xi = 0; xi < xc; xi++) {
-                for (int yj = 0; yj < height - 1; yj++) {
+            for (int xi = xc; xi < width - 1; xi++) {
+                for (int yj = yc; yj < height - 1; yj++) {
                     double x = x0 + xi * dx;
                     double y = y0 - yj * dx;
                     double colorInd = fractal.getColor(x, y);
@@ -69,30 +64,43 @@ public class DrawFractal extends Application {
                     pw.setColor(xi, yj, color);
                 }
             }
-        }
+            return wi;
+        } else {
+            WritableImage wi = new WritableImage(width, height);
+            PixelReader pr = frimg.getPixelReader();
+            PixelWriter pw = wi.getPixelWriter();
 
-        if (yc > 0) {
-            for (int xi = 0; xi < width - 1; xi++) {
-                for (int yj = 0; yj < yc; yj++) {
-                    double x = x0 + xi * dx;
-                    double y = y0 - yj * dx;
-                    double colorInd = fractal.getColor(x, y);
-                    Color color = palette.getColor(colorInd);
-                    pw.setColor(xi, yj, color);
+            for (int xi = 0; xi < Math.min(panel.getWidth(), frimg.getWidth()) - 1; xi++) {
+                for (int yj = 0; yj < Math.min(panel.getHeight(), frimg.getHeight()) - 1; yj++) {
+                    pw.setColor(xi, yj, pr.getColor(xi, yj));
                 }
             }
-        }
 
-        for (int xi = xc; xi < width - 1; xi++) {
-            for (int yj = yc; yj < height - 1; yj++) {
-                double x = x0 + xi * dx;
-                double y = y0 - yj * dx;
-                double colorInd = fractal.getColor(x, y);
-                Color color = palette.getColor(colorInd);
-                pw.setColor(xi, yj, color);
+            if (xc > 0) {
+                for (int xi = (int) Math.min(panel.getWidth(), frimg.getWidth()) - 1; xi < width - 1; xi++) {
+                    for (int yj = 0; yj < height - 1; yj++) {
+                        double x = x0 + xi * dx;
+                        double y = y0 - yj * dx;
+                        double colorInd = fractal.getColor(x, y);
+                        Color color = palette.getColor(colorInd);
+                        pw.setColor(xi, yj, color);
+                    }
+                }
             }
+
+            if (yc > 0) {
+                for (int xi = 0; xi < width - 1; xi++) {
+                    for (int yj = (int)Math.min(panel.getHeight(), frimg.getHeight()) - 1; yj < height - 1; yj++) {
+                        double x = x0 + xi * dx;
+                        double y = y0 - yj * dx;
+                        double colorInd = fractal.getColor(x, y);
+                        Color color = palette.getColor(colorInd);
+                        pw.setColor(xi, yj, color);
+                    }
+                }
+            }
+            return wi;
         }
-        return wi;
     }
 
     private void initInteraction() {
@@ -106,6 +114,8 @@ public class DrawFractal extends Application {
     }
 
     private void updateImage(int xc, int yc) {
+        if (xc < 0 && yc < 0)
+            return;
         if (panel.getWidth() != 0 && panel.getHeight() != 0) {
             frimg = createFractalImage((int) (panel.getWidth()), (int) panel.getHeight(), xc, yc);
             imgv.setImage(frimg);
@@ -116,58 +126,47 @@ public class DrawFractal extends Application {
         switch(pressedKey) {
             case UP:
                 y0 += step * dx;
-                updateImage(0, step);
                 break;
             case DOWN:
                 y0 -= step * dx;
-                updateImage(0, step);
                 break;
             case LEFT:
                 x0 -= step * dx;
-                updateImage(step, 0);
                 break;
             case RIGHT:
                 x0 += step * dx;
-                updateImage(step, 0);
                 break;
             case EQUALS:
             case ADD:
                 x0 += 0.5 * panel.getWidth() * (dx - dx / ratio);
                 y0 -= 0.5 * panel.getHeight() * (dx - dx / ratio);
                 dx /= ratio;
-                updateImage(0, 0);
                 break;
             case MINUS:
             case SUBTRACT:
                 x0 += 0.5 * panel.getWidth() * (dx - dx * ratio);
                 y0 -= 0.5 * panel.getHeight() * (dx - dx * ratio);
                 dx *= ratio;
-                updateImage(0, 0);
                 break;
             case DIGIT1:
                 palette = new BlackWhitePalette();
-                updateImage(0, 0);
                 break;
             case DIGIT2:
                 palette = new GradientBWPalette();
-                updateImage(0, 0);
                 break;
             case DIGIT3:
                 palette = new BloodVesselsPalette();
-                updateImage(0, 0);
                 break;
             case DIGIT4:
                 palette = new BlackHoleSunPalette(iters);
-                updateImage(0, 0);
                 break;
             case DIGIT5:
                 palette = new SeaLifePalette(iters);
-                updateImage(0, 0);
                 break;
             case DIGIT6:
                 palette = new WetSpotPalette();
-                updateImage(0, 0);
                 break;
         }
+        updateImage(0, 0);
     }
 }
