@@ -51,7 +51,6 @@ public class WhereIsIt extends Application {
             imgv.setImage(img);
             imgv.setFitWidth(512);
             imgv.setFitHeight(288);
-            imgv.setPreserveRatio(true);
         } catch (IOException e) {
             //ничего не делаем, просто не будем загружать и всё
         }
