@@ -133,7 +133,7 @@ public class HW_ImageViewer extends Application {
             for (File file : listOfFiles) {
                 if (file.isFile()) {
                     ImageContainer newImg = new ImageContainer(file);
-                    if (!newImg.isError())
+                     if (!newImg.isError())
                         imagesList.add(newImg);
                 }
             }
