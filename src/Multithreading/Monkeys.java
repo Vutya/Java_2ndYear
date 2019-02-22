@@ -1,5 +1,6 @@
 package Multithreading;
 
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Monkeys {
 
@@ -8,9 +9,7 @@ public class Monkeys {
         new Monkeys(); // создаём одну программу про обезьянок
     }
 
-    //
-
-    private int bananas = 1_000_000;
+    private AtomicInteger bananas = new AtomicInteger(10_000_000);
     private int total = 0;
 
     private Monkeys() {
@@ -38,17 +37,15 @@ public class Monkeys {
         // Runnable - это произвольный код, у него нет аргументов, он не возвращает результат.
         Runnable monkeyaction = () -> {
             int eaten = 0;
-            while (bananas > 0) {
+            while (true) {
                 // В скобках указывает любой объект. Он называется монитор
                 // Если один поток взял монитор (т.е. вошёл в блок), то другие потоки
                 // ждут, когда один монитор будет возвращён. В данном случае this - это объект Monkeys,
                 // или можно создать специальный объект, который нужен только как монитор.
-                synchronized (monitor) {
-                    if (bananas > 0) {// повторная проверка, не съели ли уже банан
-                        bananas--; // 1) узнать значение bananas 2) умменьшить 3) записать обратно
-                        eaten++;
-                    }
-                }
+                if (bananas.updateAndGet(n -> (n > 0 ? n - 1: -1)) >= 0)
+                    eaten++;
+                else
+                    break;
             }
             synchronized (monitor) { // Используем глобальную переменную, необходима синхронизация.
                 total += eaten;
