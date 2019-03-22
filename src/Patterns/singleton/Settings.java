@@ -1,4 +1,4 @@
-package Patterns;
+package Patterns.singleton;
 
 import javafx.scene.paint.Color;
 

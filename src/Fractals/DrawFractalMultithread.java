@@ -1,19 +1,23 @@
 package Fractals;
 
+import java.awt.image.BufferedImage;
+
 import javafx.application.Application;
 import javafx.concurrent.Task;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 
 public class DrawFractalMultithread extends Application {
     private double x0 = -2;
@@ -30,7 +34,11 @@ public class DrawFractalMultithread extends Application {
     private ImageView imgv = new ImageView();
     private Pane panel = new Pane();
 
+    private FileChooser fileChooser = new FileChooser();
+
     private Task<WritableImage> task = null;
+
+    private Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage) {
@@ -73,7 +81,6 @@ public class DrawFractalMultithread extends Application {
                         pw.setColor(xi, yj, color);
                     }
                     updateValue(copy(wi));
-                    // Попросить Посова пояснить
                     if (isCancelled())
                         return null;
                 }
@@ -90,6 +97,11 @@ public class DrawFractalMultithread extends Application {
     private void initInteraction() {
         panel.widthProperty().addListener(prop -> updateImage());
         panel.heightProperty().addListener(prop -> updateImage());
+
+        fileChooser.setInitialDirectory(new File("C:/Junkkkkkk"));
+        fileChooser.setInitialFileName("fractal.png");
+        fileChooser.getExtensionFilters().
+                add(new FileChooser.ExtensionFilter("PNG Image (*.png)", "*.png"));
     }
 
     private void updateImage() {
@@ -155,7 +167,7 @@ public class DrawFractalMultithread extends Application {
                 updateImage();
                 break;
             case S:
-                saveImage();
+                saveImage(imgv.getImage());
                 break;
         }
     }
@@ -173,10 +185,19 @@ public class DrawFractalMultithread extends Application {
         return wi;
     }
 
-    private void saveImage() {
-
+    private void saveImage(Image img) {
+        if (task.isRunning())
+            return;
+        File outputImg = fileChooser.showSaveDialog(primaryStage);
+        BufferedImage bImage = SwingFXUtils.fromFXImage(img, null);
+        try {
+            ImageIO.write(bImage, "png", outputImg);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 
-// - сохранить JPEG
-//- загрузить положение x,y,dx PrintStream, Scanner
+// - сохранить JPEG/PNG
+// - загрузить положение x,y,dx PrintStream, Scanner
+// - новые палитры (см. рекурсия)

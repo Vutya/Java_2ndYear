@@ -1,4 +1,4 @@
-package Patterns;
+package Patterns.singleton;
 
 public class SettingsLazy {
     // ЛЕНИВОСТЬ - СТАНДАРТНОЕ ПОНЯТИЕ В ПРОГРАММИРОВАНИИ
