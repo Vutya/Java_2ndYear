@@ -106,7 +106,7 @@ public class DrawFractalMultithread extends Application {
         new Thread(task).start();
 
         task.valueProperty().addListener(e -> imgv.setImage(task.getValue()));
-        task.onSucceededProperty().addListener(e -> task = null);
+        task.setOnSucceeded(e -> task = null);
     }
 
     private void initInteraction() {
