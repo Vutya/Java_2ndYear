@@ -230,5 +230,3 @@ public class DrawFractalMultithread extends Application {
         }
     }
 }
-
-// - новые палитры (см. рекурсия)
