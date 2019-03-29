@@ -5,12 +5,17 @@ import java.awt.image.BufferedImage;
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -42,6 +47,10 @@ public class DrawFractalMultithread extends Application {
 
     private Task<WritableImage> task = null;
 
+    private Button savestate = new Button("Save State");
+    private Button loadstate = new Button("Load State");
+    private Button saveimg = new Button("Save Image");
+
     private Stage primaryStage;
 
     @Override
@@ -59,9 +68,12 @@ public class DrawFractalMultithread extends Application {
     }
 
     private Parent initInterface() {
+        HBox buttons = new HBox(savestate, loadstate, saveimg);
         createFractalImage(400, 400);
         panel.getChildren().addAll(imgv);
-        return panel;
+        VBox.setVgrow(panel, Priority.ALWAYS);
+        buttons.setAlignment(Pos.BOTTOM_CENTER);
+        return new VBox(panel, buttons);
     }
 
     private void createFractalImage(int width, int height) {
@@ -105,6 +117,10 @@ public class DrawFractalMultithread extends Application {
         fileChooser.setInitialFileName("fractal.png");
         fileChooser.getExtensionFilters().
                 add(new FileChooser.ExtensionFilter("PNG Image (*.png)", "*.png"));
+
+        saveimg.setOnAction(e -> saveImage(imgv.getImage()));
+        savestate.setOnAction(e -> saveState());
+        loadstate.setOnAction(e -> loadState());
     }
 
     private void updateImage() {
@@ -169,16 +185,6 @@ public class DrawFractalMultithread extends Application {
                 palette = new WetSpotPalette();
                 updateImage();
                 break;
-            case S:
-                saveImage(imgv.getImage());
-                break;
-            case L:
-                loadState();
-                updateImage();
-                break;
-            case F:
-                saveState();
-                break;
         }
     }
 
@@ -200,6 +206,7 @@ public class DrawFractalMultithread extends Application {
             x0 = sc.nextDouble();
             y0 = sc.nextDouble();
             dx = sc.nextDouble();
+            updateImage();
         } catch (FileNotFoundException e) {
             System.out.println("Whoops");
         }
