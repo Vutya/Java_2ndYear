@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 public class BlackHoleSunPalette implements Palette {
     private final int iters;
 
-    public BlackHoleSunPalette(int iters) {
+    BlackHoleSunPalette(int iters) {
         this.iters = iters;
     }
 

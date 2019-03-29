@@ -166,6 +166,12 @@ public class DrawFractal extends Application {
             case DIGIT6:
                 palette = new WetSpotPalette();
                 break;
+            case DIGIT7:
+                palette = new CutGradientBWPalette();
+                break;
+            case DIGIT8:
+                palette = new PaletteColorLittlePieces();
+                break;
         }
         updateImage(0, 0);
     }

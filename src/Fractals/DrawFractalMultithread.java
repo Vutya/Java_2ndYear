@@ -185,6 +185,14 @@ public class DrawFractalMultithread extends Application {
                 palette = new WetSpotPalette();
                 updateImage();
                 break;
+            case DIGIT7:
+                palette = new CutGradientBWPalette();
+                updateImage();
+                break;
+            case DIGIT8:
+                palette = new PaletteColorLittlePieces();
+                updateImage();
+                break;
         }
     }
 

@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 public class SeaLifePalette implements Palette {
     private final int iters;
 
-    public SeaLifePalette(int iters) {
+    SeaLifePalette(int iters) {
         this.iters = iters;
     }
 

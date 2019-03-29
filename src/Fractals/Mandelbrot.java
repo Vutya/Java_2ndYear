@@ -4,7 +4,7 @@ public class Mandelbrot implements Fractal {
 
     private final int iters;
 
-    public Mandelbrot(int iters) {
+    Mandelbrot(int iters) {
         this.iters = iters;
     }
 
