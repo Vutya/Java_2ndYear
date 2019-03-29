@@ -17,7 +17,11 @@ import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.util.Locale;
+import java.util.Scanner;
 
 public class DrawFractalMultithread extends Application {
     private double x0 = -2;
@@ -71,7 +75,6 @@ public class DrawFractalMultithread extends Application {
             protected WritableImage call() throws Exception {
                 WritableImage wi = new WritableImage(width, height);
                 PixelWriter pw = wi.getPixelWriter();
-
                 for (int xi = 0; xi < width - 1; xi++) {
                     for (int yj = 0; yj < height - 1; yj++) {
                         double x = x0 + xi * dx;
@@ -80,7 +83,7 @@ public class DrawFractalMultithread extends Application {
                         Color color = palette.getColor(colorInd);
                         pw.setColor(xi, yj, color);
                     }
-                    updateValue(copy(wi));
+                    updateValue(new WritableImage(wi.getPixelReader(), width, height));
                     if (isCancelled())
                         return null;
                 }
@@ -169,20 +172,14 @@ public class DrawFractalMultithread extends Application {
             case S:
                 saveImage(imgv.getImage());
                 break;
+            case L:
+                loadState();
+                updateImage();
+                break;
+            case F:
+                saveState();
+                break;
         }
-    }
-
-    private WritableImage copy(WritableImage img) {
-        PixelReader pxreader = img.getPixelReader();
-        int height = (int)img.getHeight();
-        int width = (int)img.getWidth();
-        WritableImage wi = new WritableImage(width, height);
-        PixelWriter pw = wi.getPixelWriter();
-        for(int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++)
-                pw.setColor(x, y, pxreader.getColor(x, y));
-        }
-        return wi;
     }
 
     private void saveImage(Image img) {
@@ -196,8 +193,27 @@ public class DrawFractalMultithread extends Application {
             throw new RuntimeException(e);
         }
     }
+
+    private void loadState() {
+        try{
+            Scanner sc = new Scanner(new File("params.txt")).useLocale(Locale.US);
+            x0 = sc.nextDouble();
+            y0 = sc.nextDouble();
+            dx = sc.nextDouble();
+        } catch (FileNotFoundException e) {
+            System.out.println("Whoops");
+        }
+    }
+
+    private void saveState() {
+        try(PrintStream prstr = new PrintStream("params.txt")) {
+            prstr.println(x0);
+            prstr.println(y0);
+            prstr.println(dx);
+        } catch (FileNotFoundException e) {
+            System.out.println("Whoops");
+        }
+    }
 }
 
-// - сохранить JPEG/PNG
-// - загрузить положение x,y,dx PrintStream, Scanner
 // - новые палитры (см. рекурсия)
