@@ -8,9 +8,15 @@ class SVG implements AutoCloseable {
     private PrintStream out;
     private String indent = "\t";
 
-    SVG(String filename, int width, int height) throws FileNotFoundException {
+    SVG(String filename) throws FileNotFoundException {
+        int width = Settings.getInstance().getWidth();
+        int height = Settings.getInstance().getHeight();
+        String bg_color = Settings.getInstance().getBackground();
+
         out = new PrintStream(filename);
-        out.println(String.format("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"%d\" height=\"%d\">", width, height));
+        out.println(String.format("<svg xmlns=\"http://www.w3.org/2000/svg\" " +
+                "width=\"%d\" height=\"%d\">", width, height));
+        out.println(String.format("\t<rect width=\"%d\" height=\"%d\" fill=\"%s\"/>", width, height, bg_color));
     }
 
     void addTag(Tag tag) {

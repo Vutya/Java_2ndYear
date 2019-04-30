@@ -16,15 +16,14 @@ public class PositionedShape implements Shape {
 
     @Override
     public List<Tag> getTags() {
-        List<Tag> tagList = new ArrayList<>();
-
         Tag g = new Tag("g", TagType.OPEN);
         g.set("transform", "translate(" + x + ", " + y + ")");
-        tagList.add(g);
-
-        tagList.addAll(shape.getTags());
 
         Tag gClose = new Tag("g", TagType.CLOSE);
+
+        List<Tag> tagList = new ArrayList<>();
+        tagList.add(g);
+        tagList.addAll(shape.getTags());
         tagList.add(gClose);
 
         return tagList;
