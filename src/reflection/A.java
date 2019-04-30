@@ -1,4 +1,4 @@
-package reflection;
+package Reflection;
 
 public class A {
     private String name;
