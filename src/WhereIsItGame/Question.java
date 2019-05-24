@@ -1,4 +1,4 @@
-package WhereIsItGame;
+package whereIsItGame;
 
 class Question {
     private String question;

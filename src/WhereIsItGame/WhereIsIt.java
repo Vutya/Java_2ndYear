@@ -1,4 +1,4 @@
-package WhereIsItGame;
+package whereIsItGame;
 
 import javafx.application.Application;
 import javafx.scene.Parent;

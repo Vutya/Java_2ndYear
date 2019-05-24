@@ -1,4 +1,4 @@
-package DrawerSVG;
+package drawerSVG;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
@@ -26,15 +26,15 @@ class SVG implements AutoCloseable {
                 .collect(Collectors.joining(" "));
         switch (tag.getType()) {
             case OPEN_AND_CLOSE:
-                out.println(indent + "<" + tag.getName() + attrs + "/>");
+                out.println(String.format("%s<%s%s/>", indent, tag.getName(), attrs));
                 break;
             case OPEN:
-                out.println(indent + "<" + tag.getName() + attrs + ">");
+                out.println(String.format("%s<%s%s>", indent, tag.getName(), attrs));
                 indent += "\t";
                 break;
             case CLOSE:
                 indent = indent.substring(0, indent.length() - 1);
-                out.println(indent + "</" + tag.getName() + ">");
+                out.println(String.format("%s</%s>", indent, tag.getName()));
                 break;
         }
     }

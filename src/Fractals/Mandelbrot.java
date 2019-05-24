@@ -1,4 +1,4 @@
-package Fractals;
+package fractals;
 
 public class Mandelbrot implements Fractal {
 

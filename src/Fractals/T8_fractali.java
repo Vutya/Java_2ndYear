@@ -1,4 +1,4 @@
-package Fractals;
+package fractals;
 
 public class T8_fractali {
     /*
@@ -12,7 +12,7 @@ public class T8_fractali {
     */
 
     /*
-    Color в JavaFX "фабричные" методы
+    Color в javaFX "фабричные" методы
     Color.rgb(0,0,255) - синий
 
     Color.gray(0,5)

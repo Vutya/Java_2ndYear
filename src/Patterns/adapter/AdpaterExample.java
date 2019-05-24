@@ -1,6 +1,6 @@
-package Patterns.adapter;
+package patterns.adapter;
 
-import Patterns.factory.Animal;
+import patterns.factory.Animal;
 
 public class AdpaterExample {
 

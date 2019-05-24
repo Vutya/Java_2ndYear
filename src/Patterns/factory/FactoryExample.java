@@ -1,4 +1,4 @@
-package Patterns.factory;
+package patterns.factory;
 
 public class FactoryExample {
 

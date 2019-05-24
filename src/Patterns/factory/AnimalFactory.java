@@ -1,6 +1,4 @@
-package Patterns.factory;
-
-import javafx.scene.paint.Color;
+package patterns.factory;
 
 import java.util.ArrayList;
 import java.util.Collections;

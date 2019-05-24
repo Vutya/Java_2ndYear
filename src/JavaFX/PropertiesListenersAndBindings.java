@@ -1,4 +1,4 @@
-package JavaFX;
+package javaFX;
 
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
@@ -63,7 +63,7 @@ public class PropertiesListenersAndBindings extends Application {
                 )
         );
         example1.setStyle("-fx-background-color: #00FF00"); // другой способ, чуть короче
-                                                            // пользуемся CSS со стилями из JavaFX
+                                                            // пользуемся CSS со стилями из javaFX
         //----------------------------------------------------
 
         //Ctrl + D    дублировать строку
@@ -91,7 +91,7 @@ public class PropertiesListenersAndBindings extends Application {
         // Как заставить кнопку что-то делать
 
         //1) универсальный, но сложный способ
-        // В JavaFX реализована работа с событиями. Разные объекты генерируют события.
+        // В javaFX реализована работа с событиями. Разные объекты генерируют события.
         // Можно добавлять слушателей (обработчиков), которые реагируют на интерующие их события.
         // Кнопка генерирует событие типа ActionEvent.ACTION, это происходит в момент нажатия на кнопку.
         // Нажатие может быть разным, мышкой, кнопкой Enter, пробелом, касание экрана и т.п.
@@ -118,7 +118,7 @@ public class PropertiesListenersAndBindings extends Application {
         //MouseEvent.MOUSE_CLICKED - мышью нажали
         //MouseEvent.MOUSE_ENTERED - мышь навели на компонент ...
 
-        //Свойства. В JavaFX объекты имеют свойства. Это данные, которые
+        //Свойства. В javaFX объекты имеют свойства. Это данные, которые
         //связаны с объектами. Например, у кнопки - это текст, который на ней
         //написан (это свойство называется text). Или действие, которое выполняется
         //при нажатии (это свойство называется onAction)

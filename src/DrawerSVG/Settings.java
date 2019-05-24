@@ -1,4 +1,4 @@
-package DrawerSVG;
+package drawerSVG;
 
 import java.io.FileInputStream;
 import java.io.IOException;

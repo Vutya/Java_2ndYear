@@ -1,4 +1,4 @@
-package DrawerSVG;
+package drawerSVG;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -11,20 +11,23 @@ public class DrawSVG {
         Random rnd = randSeed.map(Random::new).orElseGet(Random::new);
 
         ShapeFactory factory = new ShapeFactory();
-        String rc = Settings.getInstance().getShapeDescription("red_circle");
-        String ss = Settings.getInstance().getShapeDescription("small_square");
-
         HashMap<String, Integer> shapes = Settings.getInstance().getShapesWithCount();
 
         try (SVG svg = new SVG("test.svg")) {
-            for (int i = 0; i < shapes.get("red_circle"); i++) {
-                Shape circle = new PositionedShape(factory.create(rc), rnd.nextInt(401), rnd.nextInt(401));
-                circle.draw(svg);
-            }
-            for (int i = 0; i < shapes.get("small_square"); i++) {
-                Shape square = new PositionedShape(factory.create(ss), rnd.nextInt(401), rnd.nextInt(401));
-                square.draw(svg);
-            }
+            shapes.forEach((shape, count) -> {
+                //list of shapes, list.shuffle(rnd)
+                try {
+                    for (int i = 0; i < count; i++) {
+                        String s = Settings.getInstance().getShapeDescription(shape);
+                        Shape posShape = new PositionedShape(factory.create(s),
+                                rnd.nextInt(Settings.getInstance().getWidth() + 1),
+                                rnd.nextInt(Settings.getInstance().getHeight() + 1));
+                        posShape.draw(svg);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Something has broken, when creating shapes.");
+                }
+            });
         } catch (FileNotFoundException e) {
             System.out.println("Could not create SVG file.");
         } catch (Exception e) {

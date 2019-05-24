@@ -1,4 +1,4 @@
-package Multithreading;
+package multithreading;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -62,7 +62,7 @@ public class JavaFXTaskExample extends Application {
 }
 
 /*
-В JavaFX приложениях всегда есть специальный поток пользовательского интерфейса (UI).
+В javaFX приложениях всегда есть специальный поток пользовательского интерфейса (UI).
 В нём отрисовываются элементы интерфейса и выполняются слушатели.
 Пока кнопка производит вычисления внутри слушателя, в интерфейсе ничего не рисуется.
 Соответственно, в хорошей программе с интерфейсом в потоке UI (в слушателях) не
