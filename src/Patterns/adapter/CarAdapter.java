@@ -1,6 +1,6 @@
-package patterns.adapter;
+package Patterns.adapter;
 
-import patterns.factory.Animal;
+import Patterns.factory.Animal;
 
 public class CarAdapter extends Animal {
 

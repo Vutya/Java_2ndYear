@@ -1,4 +1,4 @@
-package drawerSVG;
+package DrawerSVG;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;

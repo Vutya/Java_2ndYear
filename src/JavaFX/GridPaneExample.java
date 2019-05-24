@@ -1,4 +1,4 @@
-package javaFX;
+package JavaFX;
 
 import javafx.application.Application;
 import javafx.scene.Parent;

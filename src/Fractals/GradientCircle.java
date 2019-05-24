@@ -1,4 +1,4 @@
-package fractals;
+package Fractals;
 
 public class GradientCircle implements Fractal {
 

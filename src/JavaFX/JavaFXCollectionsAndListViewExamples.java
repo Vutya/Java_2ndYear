@@ -1,4 +1,4 @@
-package javaFX;
+package JavaFX;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -33,7 +33,7 @@ public class JavaFXCollectionsAndListViewExamples extends Application {
         // формат, размер изображения.
         // Данные для ListView хранятся в структуре данных, похожей на List<>,
         // но обычный List<> был бы неудобен. Он не сообщает о том, что в нём
-        // что-то изменилось. В javaFX используем ObservableList, он генерирует
+        // что-то изменилось. В JavaFX используем ObservableList, он генерирует
         // событие на любое изменение своего содержимого. ListView подпишется
         // на эти события, и после этого любое изменение содержимого списка будет
         // сразу видно на экране.
@@ -50,7 +50,7 @@ public class JavaFXCollectionsAndListViewExamples extends Application {
         // на обычный ArrayList, он все данные хранит в памяти, их можно легко добавлять и удалять.
 
         // Продемонстрируем, как можно создать список, который не хранит данные в памяти.
-        // В принципе, это же можно было бы делать и без javaFX с обычными списками,
+        // В принципе, это же можно было бы делать и без JavaFX с обычными списками,
         // но тут получается наглядней.
         // Этот список будет хранить 1000 чисел от 1 до 1000.
         nums = new ObservableListBase<Integer>() {

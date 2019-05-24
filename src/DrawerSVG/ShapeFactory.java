@@ -1,4 +1,4 @@
-package drawerSVG;
+package DrawerSVG;
 
 public class ShapeFactory {
     public Shape create(String shapeName) throws ClassNotFoundException, InstantiationException, IllegalAccessException{

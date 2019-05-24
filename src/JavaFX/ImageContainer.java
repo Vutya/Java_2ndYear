@@ -1,4 +1,4 @@
-package javaFX;
+package JavaFX;
 
 import javafx.scene.image.Image;
 

@@ -1,4 +1,4 @@
-package patterns.adapter;
+package Patterns.adapter;
 
 public class Car {
 

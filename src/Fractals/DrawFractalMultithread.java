@@ -1,4 +1,4 @@
-package fractals;
+package Fractals;
 
 import java.awt.image.BufferedImage;
 
@@ -55,7 +55,7 @@ public class DrawFractalMultithread extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("fractals");
+        primaryStage.setTitle("Fractals");
 
         Parent root = initInterface();
         primaryStage.setScene(new Scene(root, 400, 400));

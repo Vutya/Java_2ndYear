@@ -1,4 +1,4 @@
-package patterns.singleton;
+package Patterns.singleton;
 
 import java.io.File;
 import java.io.IOException;

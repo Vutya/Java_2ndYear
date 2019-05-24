@@ -1,4 +1,4 @@
-package drawerSVG;
+package DrawerSVG;
 
 import java.util.ArrayList;
 import java.util.List;

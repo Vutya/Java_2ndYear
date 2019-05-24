@@ -1,4 +1,4 @@
-package fractals;
+package Fractals;
 
 import javafx.scene.paint.Color;
 

@@ -1,4 +1,4 @@
-package javaFX;
+package JavaFX;
 
 public class Lecture_4 {
 }

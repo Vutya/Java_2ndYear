@@ -1,4 +1,4 @@
-package reflection;
+package Reflection;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 public class ReflectionExample {
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException,
             InstantiationException, InvocationTargetException, NoSuchMethodException {
-        String classname = "reflection.A";
+        String classname = "Reflection.A";
         Class<?> aClass = Class.forName(classname);
 
         // ещё один способ получить ссылку на класс: String.class

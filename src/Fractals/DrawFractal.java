@@ -1,4 +1,4 @@
-package fractals;
+package Fractals;
 
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -31,7 +31,7 @@ public class DrawFractal extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("fractals");
+        primaryStage.setTitle("Fractals");
 
         Parent root = initInterface();
         primaryStage.setScene(new Scene(root));

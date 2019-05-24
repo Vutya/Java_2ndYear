@@ -1,4 +1,4 @@
-package javaFX;
+package JavaFX;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -61,7 +61,7 @@ public class AppExample extends Application {
         //сразу несколько элементов. Можно использовать метод add,
         //но он добавит один элемент
         //В JavaFx чуть-чуть другие коллекции, не такие, как мы привыкли
-        //Коллекции в javaFX позволяют следить за своим содержимым, т.е.
+        //Коллекции в JavaFX позволяют следить за своим содержимым, т.е.
         //root сразу поймет, что ему добавили детей и перерисуется
         root.getChildren().addAll(left, right);
 
